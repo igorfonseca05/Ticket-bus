@@ -1,0 +1,46 @@
+{
+  "companies": [
+    {
+      "id": 1,
+      "name": "Viação Brasil",
+      "logo": "https://example.com/logos/viacao-brasil.png",
+      "routes": [
+        { "from": "São Paulo", "to": "Rio de Janeiro", "price": 150.0, "time": "08:00" },
+        { "from": "São Paulo", "to": "Brasília", "price": 250.0, "time": "14:00" },
+        { "from": "Rio de Janeiro", "to": "Belo Horizonte", "price": 180.0, "time": "10:30" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Expresso Sul",
+      "logo": "https://example.com/logos/expresso-sul.png",
+      "routes": [
+        { "from": "Curitiba", "to": "Porto Alegre", "price": 120.0, "time": "07:00" },
+        { "from": "Belo Horizonte", "to": "Salvador", "price": 300.0, "time": "12:30" },
+        { "from": "Recife", "to": "Fortaleza", "price": 220.0, "time": "09:00" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Auto Ônibus Central",
+      "logo": "https://example.com/logos/central.png",
+      "routes": [
+        { "from": "Manaus", "to": "Belém", "price": 280.0, "time": "06:00" },
+        { "from": "Porto Alegre", "to": "Curitiba", "price": 130.0, "time": "15:00" },
+        { "from": "Brasília", "to": "Goiânia", "price": 90.0, "time": "11:00" },
+          { "from": "São Paulo", "to": "Rio de Janeiro", "price": 140.0, "time": "21:00" }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Viação Nordeste",
+      "logo": "https://example.com/logos/viacao-nordeste.png",
+      "routes": [
+        { "from": "Salvador", "to": "Recife", "price": 200.0, "time": "13:00" },
+        { "from": "Fortaleza", "to": "Natal", "price": 180.0, "time": "08:30" },
+        { "from": "João Pessoa", "to": "Recife", "price": 120.0, "time": "10:00" },
+        { "from": "São Paulo", "to": "Rio de Janeiro", "price": 130.0, "time": "16:00" }
+      ]
+    }
+  ]
+}
