@@ -16,45 +16,34 @@ interface Errors {
   confirmpassword?: string[];
 }
 
-interface UserProps {
-  name: string, 
-  email: string
-}
 export type FormState =
   | { errors: Errors }
   | {
       userData: {
         name: string;
         email: string;
+        uid: string;
       };
       // response?: UserProps
       errors?: undefined;
-      redirectTo: string
+      redirectTo: string;
     }
-  | { message: string, ok: boolean };
+  | { message: string; ok: boolean };
 
-
-const signupSchema = z
-  .object({
-    name: z
-      .string()
-      .min(2, { message: "Nome precisa conter pelo menos 2 caracteres." })
-      .trim(),
-    email: z.string().email({ message: "Formato de email inválido." }).trim(),
-    password: z
-      .string()
-      .min(8, { message: "Senha precisa conter pelo menos 8 caracteres." })
-      .trim(),
-    confirmPassword: z.string().trim(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords precisam coincidir",
-    path: ["confirmPassword"], // mostra o erro em confirmPassword
-  });
+const signupSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: "Nome precisa conter pelo menos 2 caracteres." })
+    .trim(),
+  email: z.string().email({ message: "Formato de email inválido." }).trim(),
+  password: z
+    .string()
+    .min(8, { message: "Senha precisa conter pelo menos 8 caracteres." })
+    .trim(),
+});
 
 export async function signup(prevState: FormState, formData: FormData) {
-
-  const cookie = await cookies()
+  const cookie = await cookies();
 
   const db = await (await ClientPromise).db("nextAuth");
   const usersCollection = await db.collection("users");
@@ -68,11 +57,17 @@ export async function signup(prevState: FormState, formData: FormData) {
 
   const validUserData = signupSchema.safeParse(values);
 
-  const alreadyHasUser = await usersCollection.findOne({email: validUserData.data?.email})
-  if(alreadyHasUser) {
-    return {message: 'Email já cadastrado, tente novamente com outro email!', ok: false}
+  const alreadyHasUser = await usersCollection.findOne({
+    email: validUserData.data?.email,
+  });
+
+  if (alreadyHasUser) {
+    return {
+      message: "Email já cadastrado, tente novamente com outro email!",
+      ok: false,
+    };
   }
-  
+
   if (!validUserData.success) {
     return {
       errors: validUserData.error.flatten().fieldErrors,
@@ -91,13 +86,57 @@ export async function signup(prevState: FormState, formData: FormData) {
     return { message: "Ocorreu um erro ao tentar criar sua conta", ok: false };
   }
 
-  const token = await createSesssion({_id: String(user.insertedId)})
+  const token = await createSesssion({ _id: String(user.insertedId) });
 
-  cookie.set('session', token, {
+  cookie.set("session", token, {
     httpOnly: true,
-    sameSite: 'strict',
-    secure: process.env.NODE_ENV === 'production'
+    sameSite: "strict",
+    secure: process.env.NODE_ENV === "production",
+  });
+
+  return {
+    userData: {
+      name: validUserData.data.name,
+      email: validUserData.data.email,
+      uid: String(user?.insertedId),
+    },
+    redirectTo: "/inicio",
+  };
+}
+
+export interface ErrorForms {
+  email?: string[];
+  password?: string[];
+}
+
+export type FormLoginState = { errors: ErrorForms | '', redirectTo: string }
+
+const zodLoginSchema = z.object({
+  email: z.string().email({ message: "Formato de email inválido" }),
+  password: z
+    .string()
+    .min(6, { message: "Verifique sua senha — ela parece muito curta." }),
+});
+
+export async function loginFormAction(
+  prevState: FormLoginState | undefined,
+  formData: FormData): Promise<FormLoginState> {
+
+  const isValidUserCretentials = zodLoginSchema.safeParse({
+    email: xss(formData.get('email')?.toString() || ''),
+    password: xss(formData.get('password')?.toString() || ''),
   })
 
-  return { userData: {name: validUserData.data.name, email: validUserData.data.email}, redirectTo: '/inicio'};
+  if(!isValidUserCretentials.success) {
+    return {errors: isValidUserCretentials.error.flatten().fieldErrors, redirectTo: ''}
+  }
+  
+  return {
+    errors: '',
+    redirectTo: "/inicio",
+  };
+}
+
+export async function deleteSession() {
+  (await cookies()).delete("session");
 }

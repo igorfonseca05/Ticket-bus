@@ -3,7 +3,7 @@
 import { Eye, EyeOff } from "lucide-react";
 import { useActionState, useState, useEffect } from "react";
 
-import { signup, FormState } from "../../../utils/actions";
+import { signup, FormState } from "../../../../utils/actions"
 import { useRouter } from "next/navigation";
 
 const initialState: FormState = {

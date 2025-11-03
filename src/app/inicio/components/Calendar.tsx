@@ -38,6 +38,7 @@ export const DateInput: React.FC<TextInputProps> = ({
         <DatePicker
           autoComplete="off"
           name="date"
+          minDate={new Date()}
           selected={startDate}
           onChange={(date) => {
             setStartDate(date);
