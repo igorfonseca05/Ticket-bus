@@ -102,7 +102,7 @@ export function LoginForm() {
         </a>
       </div>
       <button className="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 bg-sky-500 text-white gap-2 text-lg font-bold leading-normal tracking-[0.015em] px-6 hover:bg-opacity-90 active:scale-[0.98] transition-all duration-150">
-        {pending? 'Aguarde' : 'Entrar'}
+        {pending? 'Aguarde...' : 'Entrar'}
       </button>
       {state.message && (
         <p className="text-md text-red-500 mt-2">{state.message}</p>
