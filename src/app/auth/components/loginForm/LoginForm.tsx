@@ -21,7 +21,7 @@ export function LoginForm() {
 
   const [state, action, pending] = useActionState(loginFormAction, formState);
   const [formErros, setFormErros] = useState<ErrorForms | null>(null);
-   const [seePassword, setSeePassword] = useState(false);
+  const [seePassword, setSeePassword] = useState(false);
 
   function handleInputs(e: React.ChangeEvent<HTMLInputElement>) {
     setFormErros({
@@ -84,10 +84,20 @@ export function LoginForm() {
             name="password"
             className="form-input flex pl-12 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-inset focus:ring-sky-500 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 h-12 text-base font-normal leading-normal appearance-none transition-all "
             placeholder="Digite sua senha"
-            type={seePassword? 'text': 'password'}
+            type={seePassword ? "text" : "password"}
             onChange={handleInputs}
           />
-          {seePassword? <Eye onClick={() => setSeePassword(!seePassword)} className="absolute right-3 top-3"/> : <EyeOff onClick={() => setSeePassword(!seePassword)} className="absolute right-3 top-3"/>}
+          {seePassword ? (
+            <Eye
+              onClick={() => setSeePassword(!seePassword)}
+              className="absolute right-3 top-3"
+            />
+          ) : (
+            <EyeOff
+              onClick={() => setSeePassword(!seePassword)}
+              className="absolute right-3 top-3"
+            />
+          )}
         </div>
         {formErros?.password && (
           <p className="text-xs text-red-500 mt-2">{formErros.password}</p>
@@ -101,8 +111,11 @@ export function LoginForm() {
           Esqueci minha senha
         </a>
       </div>
-      <button className="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 bg-sky-500 text-white gap-2 text-lg font-bold leading-normal tracking-[0.015em] px-6 hover:bg-opacity-90 active:scale-[0.98] transition-all duration-150">
-        {pending? 'Aguarde...' : 'Entrar'}
+      <button
+        disabled={pending ? true : false}
+        className="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 bg-sky-500 text-white gap-2 text-lg font-bold leading-normal tracking-[0.015em] px-6 hover:bg-opacity-90 active:scale-[0.98] transition-all duration-150 disabled:bg-sky-300 disabled:cursor-pointer"
+      >
+        {pending ? <p className="animate-pulse">Aguarde...</p> : "Entrar"}
       </button>
       {state.message && (
         <p className="text-md text-red-500 mt-2">{state.message}</p>
