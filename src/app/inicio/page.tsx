@@ -15,33 +15,39 @@ import { MenuHeader } from "../components/MenuHeader";
 export default async function page({
   searchParams,
 }: {
-  searchParams: Record<string, string | string[] | undefined>;
+  searchParams: Record<string, string | undefined>;
 }) {
   const { from, to, date } = await searchParams;
 
   let res = null;
 
   if (from && to) {
-    const trip = (await ClientPromise).db(process.env.DB);
-    const companies = await trip.collection<Company>(process.env.COLLETION_COMPANIES!);
+    const getTrips = unstable_cache(
+      async (from: string, to: string) => {
+        const trip = (await ClientPromise).db(process.env.DB);
+        const companies = await trip.collection<Company>(
+          process.env.COLLETION_COMPANIES!
+        );
 
-    const getData = unstable_cache(async (from, to) => {
-      const res = await companies
-        .find<Company>(
-          { "routes.from": from, "routes.to": to },
-          { projection: { "routes.$": 1, name: 1, logo: 1 } }
-        )
-        .toArray();
+        const res = await companies
+          .find<Company>(
+            { routes: { $elemMatch: { from, to } } },
+            { projection: { "routes.$": 1, name: 1, logo: 1 } }
+          )
+          .toArray();
 
-      return res;
-    });
+        return res;
+      },
+      ["trip-routes", from, to], // chave de cache única por origem/destino
+      { revalidate: 60 * 10 } // cache por 10 minutos (ajuste se quiser)
+    );
 
-    res = await getData(from, to);
+    res = await getTrips(from, to);
   }
 
   return (
     <div>
-      <MenuHeader/>
+      <MenuHeader />
       <div className="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden bg-gray-50 dark:bg-gray-900 font-sans">
         <div className="layout-container flex h-full grow flex-col">
           {/* Main Content Area */}
@@ -52,7 +58,6 @@ export default async function page({
 
               {/* Mensagens de Status (usar o state do useActionState para controlar qual mostrar) */}
               <div className="mt-8 flex flex-col gap-4">
-  
                 {res?.length !== 0 ? (
                   res?.map((companies, i) => {
                     const jsonData = JSON.stringify(companies);
