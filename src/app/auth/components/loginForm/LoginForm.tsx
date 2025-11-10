@@ -1,3 +1,5 @@
+"use client";
+
 import { LockIcon, Mail } from "lucide-react";
 import { ErrorForms, loginFormAction } from "../../../../../utils/actions";
 import { useActionState, useEffect, useState } from "react";
@@ -7,46 +9,49 @@ import { useRouter } from "next/navigation";
 import { ErroComponent } from "@/app/inicio/components/erroComponent";
 
 const formState: FormLoginState = {
-  errors: {email: [], password: []},
+  errors: { email: [], password: [] },
   redirectTo: "",
-  message: '',
-  userData: {email: '', uid: '', name: ''}
+  message: "",
+  userData: { email: "", uid: "", name: "" },
 };
 
 export function LoginForm() {
-
-  const {setUser} = useUser()
-  const router = useRouter()
+  const { setUser } = useUser();
+  const router = useRouter();
 
   const [state, action, pending] = useActionState(loginFormAction, formState);
-  const [formErros, setFormErros] = useState<ErrorForms | null>(null)
-
+  const [formErros, setFormErros] = useState<ErrorForms | null>(null);
 
   function handleInputs(e: React.ChangeEvent<HTMLInputElement>) {
-     setFormErros({
+    setFormErros({
       ...formErros,
-      [e.target.name] : ''
-     })
+      [e.target.name]: "",
+    });
   }
 
   useEffect(() => {
-    if(state.errors) {
-      return setFormErros(state.errors)
-    } 
-  }, [state.errors])
+    if (state.errors) {
+      return setFormErros(state.errors);
+    }
+  }, [state.errors]);
 
   useEffect(() => {
-    if(state.userData?.email) {
+    if (state.userData?.email) {
+      const ticket = localStorage.getItem("ticket");
 
-      console.log(state.userData)
+      if (ticket) {
+        const { ticketDetails } = JSON.parse(ticket);
+        const expired = Date.now() - ticketDetails.timestamp > 5 * 60 * 1000;
 
-      setUser(state.userData)
-      router.push(`${state.redirectTo}`)
+        setUser(state.userData);
+        expired ? router.push(`/inicio`) : router.push(`/payment`);
+      } else {
+        setUser(state.userData);
+        router.push(`${state.redirectTo}`);
+      }
     }
+  }, [state.userData]);
 
-  }, [state.userData])
-
-    
   return (
     <form action={action} className="flex flex-col gap-y-3 ">
       <label className="flex flex-col h-auto">
@@ -64,7 +69,9 @@ export function LoginForm() {
             onChange={handleInputs}
           />
         </div>
-        {formErros?.email && ( <p className="text-xs text-red-500 mt-2">{formErros.email}</p>)}
+        {formErros?.email && (
+          <p className="text-xs text-red-500 mt-2">{formErros.email}</p>
+        )}
       </label>
       <label className="flex flex-col h-auto">
         <p className="text-gray-800 dark:text-gray-200 text-lg font-medium leading-normal pb-2">
@@ -80,7 +87,9 @@ export function LoginForm() {
             onChange={handleInputs}
           />
         </div>
-         {formErros?.password && ( <p className="text-xs text-red-500 mt-2">{formErros.password}</p>)}
+        {formErros?.password && (
+          <p className="text-xs text-red-500 mt-2">{formErros.password}</p>
+        )}
       </label>
       <div className="text-right">
         <a
@@ -93,7 +102,9 @@ export function LoginForm() {
       <button className="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 bg-sky-500 text-white gap-2 text-lg font-bold leading-normal tracking-[0.015em] px-6 hover:bg-opacity-90 active:scale-[0.98] transition-all duration-150">
         Entrar{" "}
       </button>
-      {state.message && <p className="text-md text-red-500 mt-2">{state.message}</p>}
+      {state.message && (
+        <p className="text-md text-red-500 mt-2">{state.message}</p>
+      )}
     </form>
   );
 }

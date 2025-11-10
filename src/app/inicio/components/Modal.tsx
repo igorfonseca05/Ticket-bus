@@ -25,6 +25,7 @@ const SeatSelectionModal = ({ setIsOpen, isOpen, data, date }: ModalProps) => {
           ...data,
           date,
           seatNumber,
+           timestamp: new Date()
         },
         buyerInfos: {
             ...user

@@ -15,6 +15,8 @@ export function TripCard({ user }: { user: User | null }) {
   const [timerFinished, setTImerFinished] = useState(false)
   const [ticketId,  setTicketId] = useState('')
 
+  console.log(timerFinished, ticketId)
+
 
   useEffect(() => {
     if(!timerFinished) return

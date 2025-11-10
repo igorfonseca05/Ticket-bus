@@ -18,6 +18,8 @@ import { PaymentProcessing } from "./components/PaymentProcessing";
 import { Denied } from "./components/Denied";
 import { Approved } from "./components/Approved";
 import { MenuHeader } from "../components/MenuHeader";
+import { verifySession } from "../../../utils/session";
+import LoginRequiredModal from "./components/ModalWarning";
 
 interface ticketDetailsProps {
   ticketDetails: {
@@ -51,6 +53,7 @@ export default function Page() {
   const [qrCode, setQRCode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [ticket, setTicket] = useState<User | null>(null);
+  const [showModal, setShowModal] = useState(false);
 
   const [status, setStatus] = useState<Status>("idle");
 
@@ -86,8 +89,17 @@ export default function Page() {
     );
   }
 
-  function ResumeTicket() {
+  function verifyIfLoggedIn () {
+    if(!user) {
+      return setShowModal(true)
+    }
+  }
+
+
+ async function ResumeTicket() {
     setStatus("loading");
+
+    verifyIfLoggedIn()
 
     setTimeout(() => {
       const approved = Math.random() > 0.3; // 70% chance de aprovação
@@ -160,7 +172,7 @@ export default function Page() {
                       </p>
                       <div className="flex items-center gap-2 text-gray-900 dark:text-white text-lg font-semibold">
                         <span className="capitalize">
-                          {ticketDetails?.buyerInfos.name}
+                          {ticketDetails?.buyerInfos.name ? ticketDetails?.buyerInfos.name : user?.name }
                         </span>
                       </div>
                     </div>
@@ -273,6 +285,7 @@ export default function Page() {
                       cpf={cpf}
                       isValidCPF={isValidCPF}
                       setStatus={setStatus}
+                      setShowModal={setShowModal}
                     />
                   )}
 
@@ -352,6 +365,7 @@ export default function Page() {
                 </div>
               </div>
             </div>
+           {showModal && <LoginRequiredModal onClose={() => setShowModal(false)} />}
           </main>
         </div>
       </div>

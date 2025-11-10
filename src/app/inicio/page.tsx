@@ -42,7 +42,7 @@ export default async function page({
   return (
     <div>
       <MenuHeader/>
-      <div className="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden bg-sky-200 dark:bg-gray-900 font-sans">
+      <div className="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden bg-gray-50 dark:bg-gray-900 font-sans">
         <div className="layout-container flex h-full grow flex-col">
           {/* Main Content Area */}
           <main className="flex flex-1 justify-center py-10 sm:py-16 md:py-0 px-4">

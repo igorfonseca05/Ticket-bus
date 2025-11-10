@@ -5,7 +5,11 @@ import { Frown } from "lucide-react";
 
 export function NotFound() {
   return (
-    <motion.div>
+    <motion.div
+      initial={{ opacity: 0, y: 5 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.2 }}
+    >
       <main className="flex flex-1 justify-center px-4">
         <div className="layout-content-container flex flex-col max-w-2xl w-full flex-1">
           <div className=" bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl shadow-lg border border-black/5 dark:border-white/5 text-center flex flex-col items-center">

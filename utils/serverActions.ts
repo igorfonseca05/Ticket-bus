@@ -12,8 +12,8 @@ interface RemoveTicketsProps {
 
 export async function removeTickets({id, ticket}: RemoveTicketsProps) {
     if(!id || !ticket) return
-    const db = (await ClientPromise).db('nextAuth')
-    const user = db.collection<User>('users')
+    const db = (await ClientPromise).db(process.env.DB)
+    const user = db.collection<User>(process.env.COLLETION_USER!)
 
     await user.findOneAndUpdate(
         {_id: new ObjectId(id) as unknown as string}, 
@@ -25,8 +25,8 @@ export async function removeTickets({id, ticket}: RemoveTicketsProps) {
 }
 export async function removeTicket(idUser:string, idDoc:string, field: string) {
     if(!idUser) return
-    const db = (await ClientPromise).db('nextAuth')
-    const user = db.collection<User>('users')
+    const db = (await ClientPromise).db(process.env.DB)
+    const user = db.collection<User>(process.env.COLLETION_USER!)
 
     await user.updateOne({_id: new ObjectId(idUser) as unknown as string}, {
         $pull: {

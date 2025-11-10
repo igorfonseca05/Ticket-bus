@@ -46,18 +46,20 @@ export function CreditCardForm({
   cpf,
   setcpf,
   isValidCPF,
-  setStatus
+  setStatus,
+  setShowModal,
 }: {
   ticketDetails: ticketDetailsProps;
   cpf: string;
   setcpf: (e: string) => void;
   isValidCPF: boolean;
-  setStatus: (status: Status) => void
+  setStatus: (status: Status) => void;
+  setShowModal: (modal: boolean) => void;
 }) {
   const { user } = useUser();
 
   const [status, setCardStatus] = useState<Status>("idle");
-  const [cardTicket, setCardTicket] = useState<User | null>(null)
+  const [cardTicket, setCardTicket] = useState<User | null>(null);
 
   function isEffectivelyEmpty(obj: Record<string, any>): boolean {
     return Object.values(obj).every(
@@ -65,8 +67,20 @@ export function CreditCardForm({
     );
   }
 
+  function verifyIfLoggedIn() {
+    if (!user) {
+      setShowModal(true);
+      return;
+    }
+  }
+
   async function handleCardPayment(e: FormEvent) {
     e.preventDefault();
+
+    if (!user) {
+      setShowModal(true);
+      return;
+    }
 
     setCardStatus("loading");
 
@@ -103,14 +117,12 @@ export function CreditCardForm({
 
       startTransition(async () => {
         const res = await addTicket(undefined, resume);
-        setCardTicket(res)
+        setCardTicket(res);
         setCardStatus("approved");
-        setStatus('approved')
+        setStatus("approved");
       });
     }, 2000);
   }
-
-  console.log(status)
 
   return (
     <>
@@ -149,7 +161,7 @@ export function CreditCardForm({
               placeholder="Nome como impresso no cartão"
               type="text"
               required
-              defaultValue={ticketDetails?.buyerInfos.name}
+              defaultValue={ticketDetails?.buyerInfos.name || user?.name}
             />
           </label>
 
@@ -218,4 +230,3 @@ export function CreditCardForm({
     </>
   );
 }
- 
