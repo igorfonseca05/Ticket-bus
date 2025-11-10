@@ -133,9 +133,6 @@ export function Form() {
           )}
         </div>
       </label>
-      {/* {state?.errors?.confirmPassword && (
-        <p className="text-xs text-red-500">{state.errors.confirmPassword}</p>
-      )} */}
       <button
         disabled={pendind}
         className="flex items-center justify-center font-semibold text-base text-white bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-500 h-10 w-full rounded-lg mt-4 transition-colors"
