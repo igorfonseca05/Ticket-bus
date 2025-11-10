@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-const url = 'mongodb://localhost:27017'
+const url = process.env.DB_STRING!
 const options = {}
 
 
@@ -8,7 +8,7 @@ let mongoClient: MongoClient
 let ClientPromise: Promise<MongoClient> 
 
 declare global{
-     var _mongoClientPromise: Promise<MongoClient> 
+    var _mongoClientPromise: Promise<MongoClient> 
 }
 
 if(process.env.NODE_ENV === 'development') {

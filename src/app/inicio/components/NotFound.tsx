@@ -20,12 +20,6 @@ export function NotFound() {
               Nenhuma passagem encontrada para este percurso. Por favor, tente
               outra data ou destino.
             </p>
-            <a
-              className="flex w-full sm:w-auto cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 bg-sky-500 text-white gap-2 text-lg font-bold leading-normal tracking-[0.015em] px-8 mt-8 hover:bg-opacity-90 active:scale-[0.98] transition-all duration-150"
-              href="#"
-            >
-              Tentar Novamente
-            </a>
           </div>
         </div>
       </main>

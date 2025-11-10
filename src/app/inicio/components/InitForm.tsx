@@ -2,26 +2,34 @@
 
 import { MapPinHouse, MapPinCheck, Calendar } from "lucide-react";
 import { DateInput } from "./Calendar";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { format, parseISO } from "date-fns";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import SearchResultsHeader from "./searchResult";
 import { FormHeader } from "./formHeader";
+import { useSearchParams } from "next/navigation";
 
 export function InitForm() {
   const router = useRouter();
+  const searchParams = useSearchParams()
 
   const [formValues, setFormValues] = useState({
     from: "",
     to: "",
     date: "",
   });
-
   const [opacity, setOpacity] = useState(false);
   const [visible, setVisible] = useState(true);
   const [error, setError] = useState({ from: "", to: "", date: "" });
 
+  useEffect(() => {
+    if(searchParams.size > 0) {
+      setVisible(false)
+    }
+    
+  }, [searchParams.size])
+  
   function handleChanges(
     e?:
       | React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
@@ -38,7 +46,8 @@ export function InitForm() {
 
   function handleFormVisibility() {
     setOpacity(!opacity);
-    setTimeout(() => setVisible(!visible), 200);
+    setVisible(!visible)
+    // setTimeout(() => setVisible(!visible), 0);
   }
 
 
@@ -71,7 +80,7 @@ export function InitForm() {
       date: format(parseISO(formValues.date), "dd/MM/yyyy"),
     };
 
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(searchParams.toString());
 
     params.set("from", data.from);
     params.set("to", data.to);
@@ -90,9 +99,6 @@ export function InitForm() {
     <>
       {visible ? (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: opacity ? 0 : 1 }}
-          transition={{ duration: 0.3 }}
         >
           <FormHeader />
           <div className="mt-0 bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl shadow-lg border border-black/5 dark:border-white/5">

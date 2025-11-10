@@ -1,7 +1,4 @@
-import { FormHeader } from "../inicio/components/formHeader";
-import { Form } from "./components/Form";
-
-import { Mail, LockIcon } from "lucide-react";
+import Link from "next/link";
 import { FormAuthHeader } from "./components/header/FormAuthHeader";
 import { FormsContainer } from "./components/formsContainer/FormsContainer";
 
@@ -11,9 +8,9 @@ export default function Page() {
       <div className="grid w-full max-w-6xl grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
         <div className="flex-col justify-center hidden lg:flex">
           <div className="flex flex-col text-left">
-            <p className="text-sky-500 dark:text-sky-500 text-2xl font-bold">
+            <Link href={'/inicio'} className="text-sky-500 dark:text-sky-500 text-2xl font-bold">
               Passagem Sênior
-            </p>
+            </Link>
             <p className="text-gray-900 dark:text-white text-5xl sm:text-6xl font-black leading-tight tracking-[-0.033em] mt-4">
               Sua próxima viagem começa aqui.
             </p>

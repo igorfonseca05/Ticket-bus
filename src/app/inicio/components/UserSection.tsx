@@ -10,15 +10,16 @@ import { deleteSession } from "../../../../utils/actions";
 type User = {
   name: string;
   photoURL?: string;
+  uid: string
 };
 
 export function UserSection() {
-  const { user, setUser } = useUser();
+  const {user, clearUser} = useUser()
 
   return (
     <>
       {user ? (
-        <UserInfo user={user} setUser={setUser} />
+        <UserInfo user={user} clearUser={clearUser} />
       ) : (
         <div className="flex items-center gap-2">
           <Link
@@ -33,13 +34,13 @@ export function UserSection() {
   );
 }
 
-function UserInfo({ user, setUser }: { user: User , setUser: (user: null) => void }) {
+function UserInfo({ user, clearUser }: { user: User , clearUser: () => void }) {
   const [open, setOpen] = useState(false);
 
   function handleLogout() {
     startTransition(async () => {
       deleteSession();
-      setUser(null);
+      clearUser();
     });
   }
 
@@ -93,7 +94,7 @@ function UserInfo({ user, setUser }: { user: User , setUser: (user: null) => voi
             className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50"
           >
             <Link
-              href="/profile"
+              href={`/profile/${user.uid}`}
               className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
               onClick={() => setOpen(false)}
             >

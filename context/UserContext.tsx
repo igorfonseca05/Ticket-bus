@@ -1,6 +1,13 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
+import { useRouter } from "next/navigation";
 
 type User = {
   uid: string;
@@ -18,6 +25,7 @@ type UserContextType = {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: ReactNode }) {
+  const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
 
   // 🔹 Carrega usuário do localStorage ao montar
@@ -41,12 +49,13 @@ export function UserProvider({ children }: { children: ReactNode }) {
     }
   }, [user]);
 
+
   const clearUser = () => {
     setUser(null);
     localStorage.removeItem("user");
+    localStorage.removeItem("ticket");
+    router.push("/inicio");
   };
-
-  console.log(user)
 
   return (
     <UserContext.Provider value={{ user, setUser, clearUser }}>

@@ -3,11 +3,26 @@
 import { ArrowRight, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 import { Company } from "../../../../utils/types";
+import { useState } from "react";
+import SeatSelectionModal from "./Modal";
+import { ObjectId } from "mongodb";
+import { useSearchParams } from "next/navigation";
 
-export function Cards({ companies }: { companies: string }) {
+interface CardProps {
+  companies: string,
+}
+
+export function Cards({ companies}: CardProps) {
+  const params = useSearchParams()
   const data: Company = JSON.parse(companies);
 
-  console.log(data);
+  const [isOpen, setIsOpen] = useState(false)
+  const [dataTrip, setDataTrip] = useState<Company>()
+
+  function handleModal(data: Company) {
+    setDataTrip(data)
+    setIsOpen(!isOpen)
+  }
 
   return (
     <motion.div
@@ -49,9 +64,15 @@ export function Cards({ companies }: { companies: string }) {
             <p className="text-xl font-bold text-gray-800 dark:text-gray-200">
               R$ {data.routes[0].price}
             </p>
-            <button className="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-sky-500 text-white gap-2 text-base font-bold leading-normal px-4 hover:bg-opacity-90 active:scale-[0.98] transition-all duration-150">
+            <button onClick={() => handleModal(data)} className="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-sky-500 text-white gap-2 text-base font-bold leading-normal px-4 hover:bg-opacity-90 active:scale-[0.98] transition-all duration-150">
               Selecionar
             </button>
+            {isOpen && <SeatSelectionModal 
+            setIsOpen={setIsOpen} 
+            isOpen={isOpen} 
+            data={dataTrip}
+            date={params.get('date')}
+            />}
           </div>
         </div>
       </div>
