@@ -1,5 +1,5 @@
 
-<img width="1455" height="396" alt="Group 69" src="https://github.com/user-attachments/assets/18550afb-7db4-471a-8e79-6e1130af8fb1" />
+<img width="1455" height="258" alt="Group 71" src="https://github.com/user-attachments/assets/40202472-75f1-4852-b5f1-c47b90e8a1df" />
 
 # 🎟️ Ticket Bus
 
