@@ -34,7 +34,7 @@ export default async function Page({
   return (
     <>
     {/* <TicketModal isOpen={isOpen} setIsOpen={setIsOpen} id={id}/> */}
-      <MenuHeader />
+      <MenuHeader path={`/profile/${id}`} />
       <div className="bg-[#FAF8F5] dark:bg-[#111921] font-sans text-[#333333] dark:text-gray-200">
         <div className="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
           <div className="flex h-full grow flex-col">
