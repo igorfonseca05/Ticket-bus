@@ -1,3 +1,6 @@
+
+<img width="1455" height="396" alt="Group 69" src="https://github.com/user-attachments/assets/18550afb-7db4-471a-8e79-6e1130af8fb1" />
+
 # 🎟️ Ticket Bus
 
 **Ticket Bus** é um sistema web completo para compra de passagens de ônibus, desenvolvido com **Next.js**, **TypeScript** e **MongoDB**.  
