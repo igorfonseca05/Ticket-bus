@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useUser } from "../../../../context/UserContext";
 import { startTransition } from "react";
 import { deleteSession } from "../../../../utils/actions";
+import { usePathname } from "next/navigation";
 
 type User = {
   name: string;
@@ -16,15 +17,17 @@ type User = {
 export function UserSection() {
   const {user, clearUser} = useUser()
 
+  const path = usePathname()
+
   return (
     <>
       {user ? (
-        <UserInfo user={user} clearUser={clearUser} />
+         <UserInfo user={user} clearUser={clearUser} />
       ) : (
         <div className="flex items-center gap-2">
           <Link
             href="/auth"
-            className="sm:inline bg-sky-400 text-white px-4 py-2 rounded-md"
+            className={`sm:inline text-sky-500 px-4 py-2 rounded-md ${path === '/inicio' ? 'bg-white text-sky-500' : 'bg-sky-500 text-white'}`}
           >
             Entrar
           </Link>

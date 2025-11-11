@@ -1,6 +1,7 @@
 "use client";
 
 import { startTransition, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import {
   MapPinHouse,
   MapPinCheck,
@@ -20,6 +21,7 @@ import { Approved } from "./components/Approved";
 import { MenuHeader } from "../components/MenuHeader";
 import { verifySession } from "../../../utils/session";
 import LoginRequiredModal from "./components/ModalWarning";
+import Link from "next/link";
 
 interface ticketDetailsProps {
   ticketDetails: {
@@ -45,6 +47,7 @@ interface ticketDetailsProps {
 type Status = "idle" | "loading" | "approved" | "denied";
 
 export default function Page() {
+  const path = usePathname()
   const { user } = useUser();
   const [ticketDetails, setTicketDetails] = useState<ticketDetailsProps>();
   const [paymentMethod, setPaymentMethod] = useState("card");
@@ -89,17 +92,16 @@ export default function Page() {
     );
   }
 
-  function verifyIfLoggedIn () {
-    if(!user) {
-      return setShowModal(true)
+  function verifyIfLoggedIn() {
+    if (!user) {
+      return setShowModal(true);
     }
   }
 
-
- async function ResumeTicket() {
+  async function ResumeTicket() {
     setStatus("loading");
 
-    verifyIfLoggedIn()
+    verifyIfLoggedIn();
 
     setTimeout(() => {
       const approved = Math.random() > 0.3; // 70% chance de aprovação
@@ -141,10 +143,12 @@ export default function Page() {
     }, 2000);
   }
 
+  console.log(path)
+
   return (
     <>
-      <MenuHeader />
-      <div className="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+      <MenuHeader path={path} />
+      <div className="relative flex h-auto min-h-screen w-full flex-col pt-20 bg-gray-50 group/design-root overflow-x-hidden">
         <div className="layout-container flex h-full grow flex-col">
           <main className="flex flex-1 justify-center px-4">
             <div className="layout-content-container flex flex-col w-full max-w-6xl">
@@ -166,26 +170,42 @@ export default function Page() {
                     Informações do Passageiro
                   </h2>
                   <div className="space-y-6">
-                    <div className="flex flex-col gap-2">
-                      <p className="text-gray-500 dark:text-gray-400 text-base font-medium leading-normal">
-                        Comprador
-                      </p>
-                      <div className="flex items-center gap-2 text-gray-900 dark:text-white text-lg font-semibold">
-                        <span className="capitalize">
-                          {ticketDetails?.buyerInfos.name ? ticketDetails?.buyerInfos.name : user?.name }
-                        </span>
+                    {user ? (
+                      <>
+                        <div className="flex flex-col gap-2">
+                          <p className="text-gray-500 dark:text-gray-400 text-base font-medium leading-normal">
+                            Comprador
+                          </p>
+                          <div className="flex items-center gap-2 text-gray-900 dark:text-white text-lg font-semibold">
+                            <span className="capitalize">
+                              {ticketDetails?.buyerInfos.name
+                                ? ticketDetails?.buyerInfos.name
+                                : user?.name}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <p className="text-gray-500 dark:text-gray-400 text-base font-medium leading-normal">
+                            CPF
+                          </p>
+                          <div className="flex items-center gap-2 text-gray-900 dark:text-white text-lg font-semibold">
+                            <span className="capitalize">
+                              {cpf ? `${cpf}` : "000.000.000.00"}
+                            </span>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="flex flex-col items-center justify-center p-6 rounded-md bg-gray-50">
+                        <p className="mb-4 text-center text-lg text-gray-700">
+                          Para finalizar a compra da sua passagem, por favor
+                          faça login.
+                        </p>
+                        <Link href={'/auth'} className="bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 px-6 rounded-md transition">
+                          Fazer Login
+                        </Link>
                       </div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <p className="text-gray-500 dark:text-gray-400 text-base font-medium leading-normal">
-                        CPF
-                      </p>
-                      <div className="flex items-center gap-2 text-gray-900 dark:text-white text-lg font-semibold">
-                        <span className="capitalize">
-                          {cpf ? `${cpf}` : "000.000.000.00"}
-                        </span>
-                      </div>
-                    </div>
+                    )}
                     <div className="border-t border-black/10 dark:border-white/10"></div>
                     <h2 className="text-gray-900 dark:text-white text-2xl font-bold leading-tight tracking-[-0.015em] mb-6">
                       Resumo da Viagem
@@ -365,7 +385,9 @@ export default function Page() {
                 </div>
               </div>
             </div>
-           {showModal && <LoginRequiredModal onClose={() => setShowModal(false)} />}
+            {showModal && (
+              <LoginRequiredModal onClose={() => setShowModal(false)} />
+            )}
           </main>
         </div>
       </div>

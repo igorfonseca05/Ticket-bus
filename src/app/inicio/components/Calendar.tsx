@@ -45,11 +45,12 @@ export const DateInput: React.FC<TextInputProps> = ({
             handleChange(date);
           }}
           placeholderText="Selecione a data da viagem"
-          className={`form-input pl-12 w-151 flex-1 h-14 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-0 focus:ring-2 focus:ring-inset focus:ring-sky-500 text-base font-normal leading-normal appearance-none transition-all 
+          className={`form-input pl-12 w-70 sm:w-151 h-14 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-0 focus:ring-2 focus:ring-inset focus:ring-sky-500 text-base font-normal leading-normal appearance-none transition-all 
           ${error.date ? "border-2 border-red-500" : ""} `}
           calendarClassName="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-2"
           locale={ptBR} // <-- calendário em português
           dateFormat="dd/MM/yyyy" // formato de data BR
+          shouldCloseOnSelect={true}
         />
       </div>
       {error.date && (

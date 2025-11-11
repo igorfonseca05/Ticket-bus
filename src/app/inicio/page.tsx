@@ -47,8 +47,8 @@ export default async function page({
 
   return (
     <div>
-      <MenuHeader />
-      <div className="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden bg-gray-50 dark:bg-gray-900 font-sans">
+      <MenuHeader path='/inicio' />
+      <div style={{ backgroundImage: "url('ng.svg')" }} className="relative bg-cover bg-top h-screen md:pt-28 flex w-full flex-col group/design-root overflow-x-hidden bg-sky-100 dark:bg-gray-900 font-san">
         <div className="layout-container flex h-full grow flex-col">
           {/* Main Content Area */}
           <main className="flex flex-1 justify-center py-10 sm:py-16 md:py-0 px-4">
@@ -57,7 +57,7 @@ export default async function page({
               <InitForm />
 
               {/* Mensagens de Status (usar o state do useActionState para controlar qual mostrar) */}
-              <div className="mt-8 flex flex-col gap-4">
+              <div className="sm:mt-1 flex flex-col gap-4">
                 {res?.length !== 0 ? (
                   res?.map((companies, i) => {
                     const jsonData = JSON.stringify(companies);
@@ -68,14 +68,14 @@ export default async function page({
                 )}
 
                 {/* Mensagem de Sucesso (mostrar antes do redirect) */}
-                <div className="hidden items-center gap-3 p-4 rounded-lg bg-green-500/10 dark:bg-green-500/20 border border-green-500/20 dark:border-green-500/30">
+                {/* <div className="hidden items-center gap-3 p-4 rounded-lg bg-green-500/10 dark:bg-green-500/20 border border-green-500/20 dark:border-green-500/30">
                   <span className="material-symbols-outlined text-green-600 text-3xl">
                     check_circle_outline
                   </span>
                   <p className="text-green-800 dark:text-green-300 text-base">
                     Passagens encontradas! Veja as opções abaixo.
                   </p>
-                </div>
+                </div> */}
               </div>
             </div>
           </main>

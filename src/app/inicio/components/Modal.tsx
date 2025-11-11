@@ -111,7 +111,7 @@ const SeatSelectionModal = ({ setIsOpen, isOpen, data, date }: ModalProps) => {
             </button>
           </div>
           {/* Detalhes da Viagem */}
-          <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-center sm:text-left border-t border-b border-gray-200 dark:border-gray-700 py-6">
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-6 text-center sm:text-left border-t border-b border-gray-200 dark:border-gray-700 py-6">
             <div className="flex flex-col items-center sm:items-start gap-1">
               <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
                 Origem
@@ -149,7 +149,7 @@ const SeatSelectionModal = ({ setIsOpen, isOpen, data, date }: ModalProps) => {
                 Preço
               </p>
               <p className="text-lg font-bold text-blue-600">
-                R$ {data?.routes[0].price}
+                R$ {data?.routes[0].price.toFixed(2)}
               </p>
             </div>
           </div>

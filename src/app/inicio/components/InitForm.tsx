@@ -100,9 +100,9 @@ export function InitForm() {
       {visible ? (
         <motion.div
         >
-          <FormHeader />
-          <div className="mt-0 bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl shadow-lg border border-black/5 dark:border-white/5">
-            <form onSubmit={handleForm} className="flex flex-col gap-6">
+          <div className="mt-20 bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl shadow-lg border border-black/5 dark:border-white/5">
+          {/* <FormHeader /> */}
+            <form onSubmit={handleForm} className="flex flex-col gap-6 py-4">
               <div className="flex flex-col sm:flex-row gap-6">
                 {/* Campo De Onde */}
                 <label className="flex flex-col min-w-40 flex-1">
