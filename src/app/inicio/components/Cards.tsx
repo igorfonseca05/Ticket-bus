@@ -36,7 +36,7 @@ export function Cards({ companies}: CardProps) {
           <img
             alt="Logo da Viação Cometa"
             className="h-12 sm:h-14 object-contain rounded-md"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpxnUeEKndDdewPEk8xf6HUyUz4RqPji_QW3hL2vL4QpHZjYY4pBou8WuFLp5WEfNBH0XOWujhU7p4_bDYm-IfXZuA6yi4tME2VtLYYNExm3y0XAuUdYWQGr8JSmDcG1aLOdA2yhUWV1zYBsF0zxmg2Lme0Yy-H7NxyRBU5yo5BoSGy8PmLDORnWljzIy26U04eTqWSX5PnD4VlCWMcmKPEVWyB4mPXZVVGgafl0RlLmb3zdaZOq8SWxAZ9t9WBZ2_FHecdnitDrnk"
+            src={data.logo}
           />
       
         </div>

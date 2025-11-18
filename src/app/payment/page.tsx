@@ -143,7 +143,6 @@ export default function Page() {
     }, 2000);
   }
 
-  console.log(path)
 
   return (
     <>

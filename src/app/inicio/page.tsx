@@ -17,6 +17,8 @@ export default async function page({
 }: {
   searchParams: Record<string, string | undefined>;
 }) {
+
+  // Recebendo parametros pela URL
   const { from, to, date } = await searchParams;
 
   let res = null;
@@ -66,16 +68,6 @@ export default async function page({
                 ) : (
                   <NotFound />
                 )}
-
-                {/* Mensagem de Sucesso (mostrar antes do redirect) */}
-                {/* <div className="hidden items-center gap-3 p-4 rounded-lg bg-green-500/10 dark:bg-green-500/20 border border-green-500/20 dark:border-green-500/30">
-                  <span className="material-symbols-outlined text-green-600 text-3xl">
-                    check_circle_outline
-                  </span>
-                  <p className="text-green-800 dark:text-green-300 text-base">
-                    Passagens encontradas! Veja as opções abaixo.
-                  </p>
-                </div> */}
               </div>
             </div>
           </main>
