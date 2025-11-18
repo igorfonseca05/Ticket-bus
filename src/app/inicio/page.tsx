@@ -12,18 +12,18 @@ import Link from "next/link";
 import { UserSection } from "./components/UserSection";
 import { MenuHeader } from "../components/MenuHeader";
 
-import bg from '../../../public/bg.png'
+import bg from "../../../public/bg.png";
 
 export default async function page({
   searchParams,
 }: {
   searchParams: Record<string, string | undefined>;
 }) {
-
   // Recebendo parametros pela URL
   const { from, to, date } = await searchParams;
 
   let res = null;
+  let loading = false
 
   if (from && to) {
     const getTrips = unstable_cache(
@@ -40,27 +40,30 @@ export default async function page({
           )
           .toArray();
 
-        return res;
-      },
-      ["trip-routes", from, to], // chave de cache única por origem/destino
-      { revalidate: 60 * 10 } // cache por 10 minutos (ajuste se quiser)
-    );
-
-    res = await getTrips(from, to);
+          return res;
+        },
+        ["trip-routes", from, to], // chave de cache única por origem/destino
+        { revalidate: 60 } // cache por 10 minutos (ajuste se quiser)
+      );
+      res = await getTrips(from, to);
   }
+
 
   return (
     <div>
-      <MenuHeader path='/inicio' />
-      <div style={{ backgroundImage: "url('/bg.png')" }} className="relative bg-cover bg-center h-screen md:pt-15 flex w-full flex-col group/design-root overflow-x-hidden bg-sky-100 dark:bg-gray-900 font-san">
+      <MenuHeader path="/inicio" />
+      <div
+        style={{ backgroundImage: "url('/bg.png')" }}
+        className="relative bg-cover bg-center h-screen md:pt-15 flex w-full flex-col group/design-root overflow-x-hidden bg-sky-100 dark:bg-gray-900 font-san"
+      >
         <div className="layout-container flex h-full grow flex-col">
           {/* Main Content Area */}
           <main className="flex flex-1 justify-center py-10 sm:py-16 md:py-0 px-4">
             <div className="layout-content-container flex flex-col max-w-2xl w-full flex-1 mb-8">
               {/* Form Container */}
               <InitForm />
-
-              {/* Mensagens de Status (usar o state do useActionState para controlar qual mostrar) */}
+              <div className="sm:mt-1 flex flex-col gap-4">
+              </div>
               <div className="sm:mt-1 flex flex-col gap-4">
                 {res?.length !== 0 ? (
                   res?.map((companies, i) => {
@@ -70,7 +73,6 @@ export default async function page({
                 ) : (
                   <NotFound />
                 )}
-
               </div>
             </div>
           </main>

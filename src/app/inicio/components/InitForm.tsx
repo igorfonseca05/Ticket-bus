@@ -80,6 +80,8 @@ export function InitForm() {
       date: format(parseISO(formValues.date), "dd/MM/yyyy"),
     };
 
+    console.log(data)
+
     const params = new URLSearchParams(searchParams.toString());
 
     params.set("from", data.from);

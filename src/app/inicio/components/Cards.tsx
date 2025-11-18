@@ -13,6 +13,7 @@ interface CardProps {
 }
 
 export function Cards({ companies}: CardProps) {
+  
   const params = useSearchParams()
   const data: Company = JSON.parse(companies);
 
