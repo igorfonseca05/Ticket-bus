@@ -13,7 +13,7 @@ interface CardProps {
 }
 
 export function Cards({ companies}: CardProps) {
-  
+
   const params = useSearchParams()
   const data: Company = JSON.parse(companies);
 
@@ -27,9 +27,6 @@ export function Cards({ companies}: CardProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
     >
       <div className="bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-xl shadow-md border border-black/5 dark:border-white/5 flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
         <div className="shrink-0">
