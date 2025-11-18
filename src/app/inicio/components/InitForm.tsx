@@ -47,7 +47,6 @@ export function InitForm() {
   function handleFormVisibility() {
     setOpacity(!opacity);
     setVisible(!visible)
-    // setTimeout(() => setVisible(!visible), 0);
   }
 
 

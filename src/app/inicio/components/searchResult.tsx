@@ -13,16 +13,16 @@ export default function SearchResultsHeader({
 }: HeaderProps) {
   const router = useRouter();
 
-  function removingSeachParams() {
+  async function removingSeachParams() {
     if (window.location.search) {
       const url = window.location.origin + window.location.pathname;
       window.history.replaceState({}, "", url);
       router.push("/inicio");
     }
-
+    
     setTimeout(() => {
-        handleFormVisibility()
-    }, 100);
+      handleFormVisibility()
+    }, 200);
   }
 
   return (

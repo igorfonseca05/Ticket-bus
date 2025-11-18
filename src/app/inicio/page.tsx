@@ -23,7 +23,6 @@ export default async function page({
   const { from, to, date } = await searchParams;
 
   let res = null;
-  let loading = false
 
   if (from && to) {
     const getTrips = unstable_cache(
