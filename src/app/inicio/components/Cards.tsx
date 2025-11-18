@@ -41,12 +41,12 @@ export function Cards({ companies}: CardProps) {
       
         </div>
         <div className="flex-1 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left w-full">
-          <div className="flex flex-col">
-            <div className="flex flex-col sm:flex-row">
+          <div className="flex flex-col gap-y-1">
+            <div className="flex flex-col gap-y-1">
                <p className="text-lg font-bold text-gray-900 dark:text-white">
                 {data.name}
               </p>
-              <div className="inline-flex items-center gap-2 py-1 rounded-full dark:bg-gray-800">
+              <div className="inline-flex items-center gap-2 rounded-full dark:bg-gray-800">
                 <span className="text-xs font-medium text-gray-700 dark:text-gray-200">
                   {data.routes[0].from}
                 </span>

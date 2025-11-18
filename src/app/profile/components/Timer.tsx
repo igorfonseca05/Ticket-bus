@@ -10,6 +10,7 @@ interface TimerProps {
 }
 
 export function Timer({ setTImerFinished, ticket, setTicketId }: TimerProps) {
+  
   const [time, setTime] = useState(ticket.createdAt + 40 * 1000 - Date.now());
 
   if (typeof window === "undefined") return null;

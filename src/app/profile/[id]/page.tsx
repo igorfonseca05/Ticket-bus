@@ -1,12 +1,5 @@
-import { cookies } from "next/headers";
-import ClientPromise from "../../../../database/db";
-import { verifySession } from "../../../../utils/session";
-import { ObjectId } from "mongodb";
 import { User } from "../../../../utils/types";
-import { redirect } from "next/navigation";
-import { deleteSession } from "../../../../utils/actions";
-import { removeUser } from "../../../../utils/functions";
-import { Bus, TicketX } from "lucide-react";
+import { Pen} from "lucide-react";
 import { MenuHeader } from "../../components/MenuHeader";
 import Link from "next/link";
 import { getFormatedDate } from "../../../../utils/functions";
@@ -17,6 +10,7 @@ import { TripCard } from "../components/tripCard";
 import { EmptyHistoric } from "../components/EmptyHistoric";
 import { HistoryCard } from "../components/HistoryCard";
 import { NextTripContainer } from "../components/NextTripContainer";
+import { PersonalCard } from "../components/PersonalCard";
 // import { useState } from "react";
 
 export default async function Page({
@@ -73,45 +67,15 @@ export default async function Page({
                         {user?.email}
                       </p>
                     </div>
-                    <button className="flex min-w-[84px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full h-12 px-6 bg-[#5A9BDB] text-white text-base font-bold leading-normal tracking-[0.015em] w-full max-w-[480px] @[480px]:w-auto hover:bg-[#5A9BDB]/90 transition-colors">
+                    {/* <button className="flex min-w-[84px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full h-12 px-6 bg-[#5A9BDB] text-white text-base font-bold leading-normal tracking-[0.015em] w-full max-w-[480px] @[480px]:w-auto hover:bg-[#5A9BDB]/90 transition-colors">
                       <span className="text-xl">✏️</span>
-                      {/* Substituído por emoji/texto simples */}
-                      <span className="truncate">Editar Perfil</span>
-                    </button>
+                    
+                      <span className="truncate">Penar Perfil</span>
+                    </button> */}
                   </div>
                 </div>
                 {/* Personal Info Card */}
-                <div className="bg-white dark:bg-[#1A242E] rounded-xl p-6 shadow-sm">
-                  <h2 className="text-[#333333] dark:text-gray-100 text-[22px] font-bold leading-tight tracking-[-0.015em] pb-4">
-                    Informações Pessoais
-                  </h2>
-                  <div className="grid grid-cols-[auto_1fr] gap-x-6">
-                    <div className="col-span-2 grid grid-cols-subgrid border-t border-t-gray-200 dark:border-t-[#2D3748] py-5">
-                      <p className="text-[#666666] dark:text-gray-400 text-base font-normal leading-normal">
-                        CPF
-                      </p>
-                      <p className="text-[#333333] dark:text-gray-200 text-base font-medium leading-normal">
-                        ***.123.456-**
-                      </p>
-                    </div>
-                    <div className="col-span-2 grid grid-cols-subgrid border-t border-t-gray-200 dark:border-t-[#2D3748] py-5">
-                      <p className="text-[#666666] dark:text-gray-400 text-base font-normal leading-normal">
-                        Telefone
-                      </p>
-                      <p className="text-[#333333] dark:text-gray-200 text-base font-medium leading-normal">
-                        (11) 98765-4321
-                      </p>
-                    </div>
-                    <div className="col-span-2 grid grid-cols-subgrid border-t border-t-gray-200 dark:border-t-[#2D3748] py-5">
-                      <p className="text-[#666666] dark:text-gray-400 text-base font-normal leading-normal">
-                        Endereço
-                      </p>
-                      <p className="text-[#333333] dark:text-gray-200 text-base font-medium leading-normal">
-                        Rua das Flores, 123, São Paulo - SP
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <PersonalCard/>
                 {/* Tickets Section */}
                 <div className="flex flex-col gap-8">
                   {/* Upcoming Trips */}

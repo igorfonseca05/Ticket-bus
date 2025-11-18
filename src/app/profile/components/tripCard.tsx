@@ -64,7 +64,7 @@ export function TripCard({ user }: { user: User | null }) {
                   <p className="text-[#666666] flex flex-col dark:text-gray-400 text-sm">
                     {getFormatedDate(ticket.date)} -{" "}
                     {ticket.route?.time} 
-                    <Timer setTicketId={setTicketId} ticket={ticket} setTImerFinished={setTImerFinished}/>
+                    {/* <Timer setTicketId={setTicketId} ticket={ticket} setTImerFinished={setTImerFinished}/> */}
                   </p>
                 </div>
               </div>
