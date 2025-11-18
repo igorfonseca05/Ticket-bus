@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+<img width="1455" height="258" alt="Group 71" src="https://github.com/user-attachments/assets/40202472-75f1-4852-b5f1-c47b90e8a1df" />
 
-First, run the development server:
+# 🎟️ Ticket Bus
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Ticket Bus** é um sistema web completo para compra de passagens de ônibus, desenvolvido com **Next.js**, **TypeScript** e **MongoDB**.  
+O projeto foi criado com foco em **experiência do usuário, organização de código e integração full stack**, servindo como demonstração técnica para portfólio.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Funcionalidades
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 🔍 Pesquisa de rotas disponíveis por cidade de origem e destino  
+- 🪑 Escolha de assento no ônibus  
+- 📅 Seleção de data e horário da viagem  
+- 💳 Simulação de pagamento e geração de passagem  
+- 📥 Download da passagem após a compra  
+- 🔐 Autenticação de usuário (login e logout)  
+- 💾 Armazenamento de dados no banco (MongoDB)  
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🧠 Tecnologias utilizadas
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### **Front-end**
+- [Next.js 14](https://nextjs.org/)
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### **Back-end**
+- [Node.js](https://nodejs.org/)
+- [MongoDB](https://www.mongodb.com/)
+- API RESTful integrada ao banco
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📂 Estrutura do projeto
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<img width="232" height="593" alt="image" src="https://github.com/user-attachments/assets/3a6b4e5e-afc4-488e-93f9-7117f53f0e3d" />
+
+---
+
+## 💡 Decisões de projeto
+
+O **Ticket Bus** foi desenvolvido como um projeto de **portfólio**, portanto:
+- Os dados iniciais das rotas e companhias são **inseridos diretamente no banco de dados** (sem interface administrativa).  
+- A prioridade foi **demonstrar o fluxo completo** de uma aplicação full stack, desde o front-end até a integração com o banco.  
+- A aplicação foi construída com foco em **limpeza de código, legibilidade e separação de responsabilidades.**
+
+---
+
+## 🧭 Fluxo de uso
+
+1. O usuário acessa a tela inicial e busca uma rota entre duas cidades.  
+2. A aplicação carrega as companhias disponíveis e as rotas correspondentes.  
+3. O usuário escolhe o assento e confirma o pagamento.  
+4. Após a compra, é possível **baixar a passagem** com os dados do trajeto.  
+4. É possivel também ver o histórico de compra do usuário.  
+
+---
+
+## 🧑‍💻 Autor
+
+**Igor Ribeiro da Fonseca**  
+Desenvolvedor Full Stack  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/igorfondev)  
+[![Email](https://img.shields.io/badge/Email-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:igorfondev@gmail.com)  
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=flat-square&logo=whatsapp&logoColor=white)](https://wa.me/5512991742515)
+
+---
+
+## 📸 Preview
+
+> Em breve: imagens e vídeo demonstrativo do fluxo de compra de passagens.
+
+---
+
+## 📘 Nota
+
+> Este projeto tem caráter **demonstrativo** e foi criado com o objetivo de **expor habilidades em desenvolvimento web full stack**.  
+>  
+> Um sistema com **interface administrativa completa** será apresentado em outro projeto: [Paraíso da Gastronomia](https://github.com/igorfonseca05/Delivery-website).
+
+---
