@@ -50,7 +50,7 @@ export default async function page({
   return (
     <div>
       <MenuHeader path='/inicio' />
-      <div style={{ backgroundImage: "url('ng.svg')" }} className="relative bg-cover bg-top h-screen md:pt-15 flex w-full flex-col group/design-root overflow-x-hidden bg-sky-100 dark:bg-gray-900 font-san">
+      <div style={{ backgroundImage: "url('bg.png')" }} className="relative bg-cover bg-center h-screen md:pt-15 flex w-full flex-col group/design-root overflow-x-hidden bg-sky-100 dark:bg-gray-900 font-san">
         <div className="layout-container flex h-full grow flex-col">
           {/* Main Content Area */}
           <main className="flex flex-1 justify-center py-10 sm:py-16 md:py-0 px-4">
@@ -68,6 +68,7 @@ export default async function page({
                 ) : (
                   <NotFound />
                 )}
+
               </div>
             </div>
           </main>

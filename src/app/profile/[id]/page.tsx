@@ -74,7 +74,7 @@ export default async function Page({
                       </p>
                     </div>
                     <button className="flex min-w-[84px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full h-12 px-6 bg-[#5A9BDB] text-white text-base font-bold leading-normal tracking-[0.015em] w-full max-w-[480px] @[480px]:w-auto hover:bg-[#5A9BDB]/90 transition-colors">
-                      <span className="text-xl">✏️</span>{" "}
+                      <span className="text-xl">✏️</span>
                       {/* Substituído por emoji/texto simples */}
                       <span className="truncate">Editar Perfil</span>
                     </button>

@@ -27,7 +27,7 @@ export function UserSection() {
         <div className="flex items-center gap-2">
           <Link
             href="/auth"
-            className={`sm:inline px-4 py-2 rounded-md bg-sky-500 text-white`}
+            className={`sm:inline px-4 py-2 rounded-md ${path === '/inicio' ? "bg-white text-sky-500" : ' bg-sky-500 text-white' }`}
           >
             Entrar
           </Link>
