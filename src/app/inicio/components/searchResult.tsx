@@ -1,3 +1,5 @@
+"use client"
+
 import { ArrowLeft, CircleArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -18,7 +20,9 @@ export default function SearchResultsHeader({
       router.push("/inicio");
     }
 
-    handleFormVisibility();
+    setTimeout(() => {
+        handleFormVisibility()
+    }, 100);
   }
 
   return (
